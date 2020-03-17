@@ -1,5 +1,6 @@
 # radonAnalysis
-A ROOT C++ macro that analyzes .root files and plots Radon concentration over time
+A ROOT C++ macro that analyzes .root files and plots Radon concentration over time and saves it to c.pdf
+Included is a few sample files from the Radon monitor. They are not to be used in any context other than understanding this macro.
 
 ## A macro that I wrote to do the following:
 1. Open a .root file
@@ -19,4 +20,7 @@ However, since I've seperated my macro into functions, many of them will work pe
 3. histIntegrateRN integrates the fadc_channel using a gaussian fit
 4. runTimeInHours takes the start and end point and finds how many hours were in a Radon measurement run
 5. plot on rnAnalysis.cc uses the extractDates and a Latex workaround to put the dates on the x axis, in rnAnalysis2.cc (preferred), I use SetTimeDisplay() to put spaced out dates on the x axis.
+
+To run this macro, open up a terminal, clone this repo, cd into it, then run 
+```root rnAnalysis2.cc```
 
