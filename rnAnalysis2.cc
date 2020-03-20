@@ -49,7 +49,6 @@ void plot(vector<double> conc, vector <double> date);
 void rnAnalysis2() {
     vector <string> files = listFiles();
     vector <double> datesOnly = extractDates(files);
-    cout << "1" << endl;
     cout << "Found " << files.size() << " files" << endl;
     vector<double> rnConcentrations;
     for (int x = 0; x < files.size(); x++) {
@@ -133,23 +132,18 @@ double histIntegrateRN(string filename) {
     //Turn string into char*
     char *cstr = new char[filename.length() + 1];
     strcpy(cstr, filename.c_str());
-    //Concatenate char* so no duplicate hists are made
-    char histname[100];
-    strcpy(histname, "h_fadc");
-    strcpy(histname, cstr);
     //manipulate histogram, fit it, integrate
-    TH1D *h = new TH1D(histname, "fadc;channel;#entries", 8039., 0., 4096.);
+    TH1D *h = new TH1D(cstr, "fadc;channel;#entries", 8039., 0., 4096.);
     TFile *f = TFile::Open(cstr);
     TTree *t;
     TCanvas *c = new TCanvas("c", "titles", 600, 600);
     f->GetObject("r", t);
     gROOT->cd();
-    c->cd();
     try {
-        t->Draw(Form("fadc_channel>>%s", histname), "", "HIST");
+        t->Project(cstr, "fadc_channel");
     }
     catch (int e) {
-        cout << "ops" << endl;
+        cout << "Error in histIntegrateRN" << endl;
     }
     h->Fit("gaus", "Q", "", 1850, 2050);
     TF1 *func = h->GetFunction("gaus");
@@ -218,5 +212,6 @@ void plot(vector<double> conc, vector <double> date) {
     graph->GetHistogram()->GetXaxis()->SetTimeDisplay(1);
     graph->GetHistogram()->GetXaxis()->SetTimeFormat("%d\/%m\/%y%F1970-01-01 00:00:00");
     c->Print("c.pdf");
+    conc.clear();
+    date.clear();
 }
-
