@@ -160,6 +160,7 @@ double histIntegrateRN(string filename) {
     delete c;
     delete f;
     delete func;
+    delete h;
     return ans;
 }
 
