@@ -1,6 +1,7 @@
 # radonAnalysis
-A ROOT C++ macro that analyzes .root files and plots Radon concentration over time and saves it to c.pdf
-Two examples are given, rnAnalysis.cc and rnAnalysis2.cc. They have differences that are discussed in the rest of the README
+I wrote thie macro during my COOP work term at SNOLAB, a state of the art science facility that features numerous neutrino and dark matter experiments.
+This repo is a ROOT C++ macro that analyzes .root files and plots Radon concentration over time and saves it to c.pdf
+Two examples are given, rnAnalysis.cc and rnAnalysis2.cc. They have differences that are discussed below.
 
 ## A macro that I wrote to do the following:
 1. Open a .root file
